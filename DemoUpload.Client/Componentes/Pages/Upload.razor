@@ -1,0 +1,34 @@
+@page "/upload"
+@using DemoUpload.Components.Servicos
+
+@inject ServicoUploadArquivos servicoUploadArquivos
+
+<div class="container">
+	<h3>Demo de Upload </h3>
+	<form class="row" @onsubmit="aoEnviar">
+		<label for="arquivo" class="form-label">Selecione arquivo</label>
+		<input type="file" name="arquivo" id="arquivo" class="form-control mt-3" accept="image/*"
+			@onchange="aoMudarArquivo" />
+		<button type="submit" class="btn btn-primary form-control mt-3">
+			Enviar arquivo
+		</button>
+		@if (!string.IsNullOrEmpty(urlImagem))
+		{
+			<img src="@urlImagem" class="img-fluid" />
+		}
+
+	</form>
+
+</div>
+
+@code {
+	private string urlImagem = "";
+	private void aoMudarArquivo(ChangeEventArgs e)
+	{
+		var arquivo = e.Value;
+	}
+	private void aoEnviar(EventArgs e)
+	{
+
+	}
+} using DemoUpload.Components.Servicos;
