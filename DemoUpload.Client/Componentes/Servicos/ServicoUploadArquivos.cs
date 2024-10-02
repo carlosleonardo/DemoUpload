@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Http.Json;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace DemoUpload.Components.Servicos;
+namespace DemoUpload.Client.Componentes.Servicos;
 
 public class ServicoUploadArquivos
 {
@@ -16,7 +13,7 @@ public class ServicoUploadArquivos
         this.httpClient = httpClient;
     }
 
-    public async Task UploadArquivo(IBrowserFile arquivo)
+    public async Task<string> UploadArquivo(IBrowserFile arquivo)
     {
         // Precisamos enviar o conteúdo do arquivo para o servidor
         // Para isso usamos como dados do formulário e adicionamos o conteúdo do arquivo
@@ -26,8 +23,16 @@ public class ServicoUploadArquivos
         {
             content.Add(conteudoArquivo, "file", arquivo.Name);
             var resposta = await httpClient.PostAsync(urlServidorUpload, content);
-
+            if (resposta.IsSuccessStatusCode)
+            {
+                var resultado = await resposta.Content.ReadFromJsonAsync<ResultadoUpload>();
+                return resultado?.Url ?? "";
+            }
         }
-
+        return "";
+    }
+    private class ResultadoUpload
+    {
+        public string? Url { get; set; }
     }
 }

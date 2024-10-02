@@ -2,8 +2,7 @@ using DemoUpload.Components;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
-using DemoUpload.Components.Servicos;
-
+using DemoUpload.Client.Componentes.Servicos;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services
