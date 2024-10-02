@@ -8,7 +8,7 @@
 	<h3>Demo de Upload </h3>
 	<form class="row" @onsubmit="aoEnviar" @onsubmit:preventDefault="true">
 		<label for="arquivo" class="form-label">Selecione arquivo</label>
-		<InputFile type="file" id="arquivo" class="form-control mt-3" accept="image/*" oninput="aoMudarArquivo" />
+		<InputFile type="file" id="arquivo" class="form-control mt-3" accept="image/*" OnChange="aoMudarArquivo" />
 		<button class="btn btn-primary form-control mt-3" type="submit">
 			Enviar arquivo
 		</button>
