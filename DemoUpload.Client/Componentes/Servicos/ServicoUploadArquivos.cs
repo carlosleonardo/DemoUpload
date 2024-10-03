@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Components.Forms;
 
@@ -21,7 +22,10 @@ public class ServicoUploadArquivos
         var conteudoArquivo = new StreamContent(arquivo.OpenReadStream());
         if (arquivo is not null)
         {
+            conteudoArquivo.Headers.ContentType = new MediaTypeHeaderValue(arquivo.ContentType);
             content.Add(conteudoArquivo, "file", arquivo.Name);
+
+
             var resposta = await httpClient.PostAsync(urlServidorUpload, content);
             if (resposta.IsSuccessStatusCode)
             {
